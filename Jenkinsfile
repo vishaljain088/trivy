@@ -26,7 +26,7 @@ pipeline {
     }
     stage('Scan Severity') {
       steps {
-        sh 'docker run ghcr.io/aquasecurity/trivy:latest image --exit-code 1 --severity CRITICAL vishaljain088/trivy'
+        sh 'docker run ghcr.io/aquasecurity/trivy:latest image --exit-code 1 --severity CRITICAL vishaljain088/dockerwebapp'
       }
     }
   }
