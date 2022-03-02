@@ -11,7 +11,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh 'docker build -t vishaljain088/dockerwebapp .'
+        sh 'docker build -t vishaljain088/trivy .'
       }
     }
     stage('Scan') {
