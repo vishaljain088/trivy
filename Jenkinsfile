@@ -11,12 +11,12 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh 'docker build -t vishaljain088/trivy .'
+        sh 'docker build -t vishaljain088/dockerwebapp .'
       }
     }
     stage('Scan') {
       steps {
-        sh 'docker run ghcr.io/aquasecurity/trivy:latest image vishaljain088/trivy > scanning.txt'		
+        sh 'docker run ghcr.io/aquasecurity/trivy:latest image vishaljain088/dockerwebapp > scanning.txt'		
       }
     }
 	stage("Email Notification"){
