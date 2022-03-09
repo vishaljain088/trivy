@@ -21,7 +21,13 @@ pipeline {
 	      }
       }
     }
-	stage("Email Notification"){
+    stage("Filter Result"){
+      steps {
+        jq '.Results[].Vulnerabilities[].VulnerabilityID' trivyreport.json
+      }
+    }	  
+	  
+    stage("Email Notification"){
       steps {
         emailext (attachmentsPattern: 'trivyreport.json', subject: "Trivy Scanning", body: '''${SCRIPT, template="groovy-html.template"}''', mimeType: 'text/html', to: 'jenkinsbyjain@gmail.com')
       }
