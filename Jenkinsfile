@@ -16,7 +16,7 @@ pipeline {
     }
     stage('Scan') {
       steps {
-        sh 'docker run ghcr.io/aquasecurity/trivy:latest image -f json vishaljain088/dockerwebapp > trivyreport.json | jq '.Results' trivyreport.json'	
+        sh 'docker run ghcr.io/aquasecurity/trivy:latest image -f json vishaljain088/dockerwebapp > trivyreport.json | jq '.Results[]' trivyreport.json'	
       }
     }
 	stage("Email Notification"){
