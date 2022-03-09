@@ -23,7 +23,9 @@ pipeline {
     }
     stage("Filter Result"){
       steps {
-        jq '.Results[].Vulnerabilities[].VulnerabilityID' trivyreport.json
+	      script {
+                       jq '.Results[].Vulnerabilities[].VulnerabilityID' trivyreport.json
+	      }
       }
     }	  
 	  
