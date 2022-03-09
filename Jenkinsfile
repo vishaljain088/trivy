@@ -16,12 +16,12 @@ pipeline {
     }
     stage('Scan') {
       steps {
-        sh 'docker run ghcr.io/aquasecurity/trivy:latest image vishaljain088/dockerwebapp > scanning.txt'		
+        sh 'docker run ghcr.io/aquasecurity/trivy:latest image vishaljain088/dockerwebapp > trivyreport.json'		
       }
     }
 	stage("Email Notification"){
       steps {
-        emailext (attachmentsPattern: 'scanning.txt', subject: "Trivy Scanning", body: '''${SCRIPT, template="groovy-html.template"}''', mimeType: 'text/html', to: 'jenkinsbyjain@gmail.com')
+        emailext (attachmentsPattern: 'trivyreport.json', subject: "Trivy Scanning", body: '''${SCRIPT, template="groovy-html.template"}''', mimeType: 'text/html', to: 'jenkinsbyjain@gmail.com')
       }
     }
     stage('Scan Severity') {
