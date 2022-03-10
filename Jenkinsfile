@@ -17,7 +17,7 @@ pipeline {
     stage('Scan') {
       steps {
 	      script {
-                      sh 'docker run ghcr.io/aquasecurity/trivy:latest image -f json vishaljain088/dockerwebapp | jq'
+                      sh 'docker run ghcr.io/aquasecurity/trivy:latest image -f json vishaljain088/dockerwebapp | jq '.Results[].Vulnerabilities[].VulnerabilityID' trivyreport.json'
 	      }
       }
     }
