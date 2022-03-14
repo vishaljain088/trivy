@@ -21,14 +21,22 @@ pipeline {
 	      }
       }
     }
-    stage ('push artifact') {
+    stage('Generate Artifacts') {
             steps {
-                sh 'mkdir archive'
-                sh 'echo test > archive/trivyreport.json'
-                zip zipFile: 'test.zip', archive: false, dir: 'archive'
-                archiveArtifacts artifacts: 'test.zip', fingerprint: true
+                // this brings artifacts from job named as this one, and this build
+                step([
+                    $class: 'CopyArtifact',
+                    filter: 'trivyreport.json',
+                    fingerprintArtifacts: true,
+                    optional: true,
+                    projectName: env.JOB_NAME,
+                    selector: [$class: 'SpecificBuildSelector',
+                            buildNumber: env.BUILD_NUMBER]
+                ])
+
+                sh 'cat trivyreport.json'
             }
-    }
+        }
     stage("Email Notification"){
       steps {
         emailext (attachmentsPattern: 'trivyreport.json', subject: "Trivy Scanning", body: '''${SCRIPT, template="groovy-html.template"}''', mimeType: 'text/html', to: 'jenkinsbyjain@gmail.com')
