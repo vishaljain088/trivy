@@ -21,6 +21,14 @@ pipeline {
 	      }
       }
     }
+    stage ('push artifact') {
+            steps {
+                sh 'mkdir archive'
+                sh 'echo test > archive/trivyreport.json'
+                zip zipFile: 'test.zip', archive: false, dir: 'archive'
+                archiveArtifacts artifacts: 'test.zip', fingerprint: true
+            }
+    }
     stage("Email Notification"){
       steps {
         emailext (attachmentsPattern: 'trivyreport.json', subject: "Trivy Scanning", body: '''${SCRIPT, template="groovy-html.template"}''', mimeType: 'text/html', to: 'jenkinsbyjain@gmail.com')
