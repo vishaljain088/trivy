@@ -24,7 +24,7 @@ pipeline {
     stage('Scan') {
       steps {
 	      script {
-                      sh '$trivy -d image -f json -o trivyreport.json vishaljain088/dockerwebapp'
+                      sh 'trivy -d image -f json -o trivyreport.json vishaljain088/dockerwebapp'
 	      }
       }
     }
