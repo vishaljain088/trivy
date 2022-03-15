@@ -17,7 +17,7 @@ pipeline {
     stage('Trivy Scan') {
       steps {
 	      script {
-                      sh '--rm -v trivy-cache:/root/.cache/ -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest -d image -f json -o trivyreport.json vishaljain088/dockerwebapp'
+                      sh 'docker run ghcr.io/aquasecurity/trivy:latest -d image -f json -o trivyreport.json vishaljain088/dockerwebapp'
 	      }
       }
     }
