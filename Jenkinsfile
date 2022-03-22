@@ -21,20 +21,9 @@ pipeline {
 	      }
       }
     }
-    stage('Generate Artifacts') {
+    stage('Parse Trivy JSON') {
             steps {
-                // this brings artifacts from job named as this one, and this build
-                step([
-                    $class: 'CopyArtifact',
-                    filter: 'trivyreport.json',
-                    fingerprintArtifacts: true,
-                    optional: true,
-                    projectName: env.JOB_NAME,
-                    selector: [$class: 'SpecificBuildSelector',
-                            buildNumber: env.BUILD_NUMBER]
-                ])
-
-                sh 'cat trivyreport.json'
+		    sh 'TrivyScan.py'
             }
         }
     stage("Email Notification"){
