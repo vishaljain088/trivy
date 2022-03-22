@@ -23,7 +23,7 @@ pipeline {
     }
     stage('Parse Trivy JSON') {
             steps {
-		    sh 'TrivyScan.py'
+		    sh 'python TrivyScan.py'
             }
         }
     stage("Email Notification"){
