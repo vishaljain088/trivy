@@ -1,5 +1,10 @@
 import json
 
+trivyNormalizedLowSeverity = 0
+trivyNormalizedMediumSeverity = 0
+trivyNormalizedHighSeverity = 0
+trivyNormalizedCriticalSeverity = 0
+
 with open('trivyreport.json') as jsonfile:
     jsondata = ''.join(line for line in jsonfile if not line.startswith('2022' or '2023'))
     res = json.loads(jsondata)
