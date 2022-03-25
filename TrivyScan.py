@@ -7,22 +7,23 @@ with open('trivyreport.json') as jsonfile:
         for v in r["Vulnerabilities"]:
             trivySeverity = v["Severity"]
             if trivySeverity == 'LOW':
-                trivyProductSev = int(1)
-                trivyNormalizedSev = trivyProductSev * 10
-                print("Threshold for LOW Severity: ")
-                print(trivyNormalizedSev)
+               trivyProductSev = int(1)
+               trivyNormalizedLowSeverity = trivyNormalizedLowSeverity + trivyProductSev * 10
             elif trivySeverity == 'MEDIUM':
                  trivyProductSev = int(4)
-                 trivyNormalizedSev = trivyProductSev * 10
-                 print("Threshold for MEDIUM Severity: ")
-                 print(trivyNormalizedSev)
+                 trivyNormalizedMediumSeverity = trivyNormalizedMediumSeverity + trivyProductSev * 10
             elif trivySeverity == 'HIGH':
                  trivyProductSev = int(7)
-                 trivyNormalizedSev = trivyProductSev * 10
-                 print("Threshold for HIGH Severity: ")
-                 print(trivyNormalizedSev)
+                 trivyNormalizedHighSeverity = trivyNormalizedHighSeverity + trivyProductSev * 10
             elif trivySeverity == 'CRITICAL':
                  trivyProductSev = int(9)
-                 trivyNormalizedSev = trivyProductSev * 10
-                 print("Threshold for CRITICAL Severity: ")
-                 print(trivyNormalizedSev)
+                 trivyNormalizedCriticalSeverity = trivyNormalizedCriticalSeverity + trivyProductSev * 10
+                 
+print("Threshold for LOW Severity: ")
+print(trivyNormalizedLowSeverity)
+print("Threshold for MEDIUM Severity: ")
+print(trivyNormalizedMediumSeverity)
+print("Threshold for HIGH Severity: ")
+print(trivyNormalizedHighSeverity)
+print("Threshold for CRITICAL Severity: ")
+print(trivyNormalizedCriticalSeverity)
